@@ -61,14 +61,19 @@ button {
     text-transform: uppercase;
   }
 
-  .btn-success {
-    background-color: #daf3da;
-    color:            #298129;
+  .btn-primary {
+    background-color: #e5e4ff;
+    color:            #44417c;
   }
 
   .btn-danger {
     background-color: #fde5ec;
     color:            #d31a50;
+  }
+
+  .btn-success {
+    background-color: #daf3da;
+    color:            #298129;
   }
 /* End Buttons */
 
@@ -117,3 +122,14 @@ button {
   max-width:  800px;
   min-width:  400px;
 }
+
+.row {
+  display:    flex;
+  flex-wrap:  wrap;
+}
+
+/* Utilities */
+  .mt-3 { margin-top: 1rem; }
+
+  .gap-3 { gap: 1rem; }
+/* End Utilities */

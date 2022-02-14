@@ -8,6 +8,7 @@
           { id: id++, text: 'Learn Vue.js', isComplete: false },
         ],
         newTodo: '',
+        hideCompleted: false,
       }
     },
     methods: {
@@ -21,6 +22,17 @@
         this.todos = [];
       }
     },
+    computed: {
+      filteredTodos() {
+        let filteredTodos = this.todos;
+
+        if (this.hideCompleted) {
+          filteredTodos = filteredTodos.filter(todo => !todo.isComplete);
+        }
+
+        return filteredTodos;
+      }
+    }
   }
 </script>
 
@@ -48,13 +60,19 @@
       </div>
     </form>
 
-    <button class="btn btn-danger" @click="removeAllTodos">Remove All</button>
+    <h3>Configs</h3>
+
+    <div class="row gap-3 mt-3">
+      <button class="btn btn-danger" @click="removeAllTodos">Remove All</button>
+
+      <button class="btn btn-primary" @click="hideCompleted = !hideCompleted">{{ hideCompleted ? 'Show' : 'Hide'}} Completed</button>
+    </div>
   </section>
 
   <main>
     <section class="container">
       <ul class="todo-list">
-        <li v-for="todo in todos" :key="todo.id">
+        <li v-for="todo in filteredTodos" :key="todo.id">
           <input
             type="checkbox"
             :id="`doneCheck${todo.id}`"
