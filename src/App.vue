@@ -1,23 +1,24 @@
 <script>
- export default {
+  let id = 0;
 
- }
-  // let id = 0;
-
-  // const todos = ref<TodoModel[]>([
-  //   { id: id++, text: 'Learn Vue.js', isComplete: false, }
-  // ]);
-
-  // const newTodo = ref('');
-
-  // const addTodo     = ref(() => todos.value.push({ id: id++, text: newTodo.value, isComplete: false }));
-  // const removeTodo  = ref((todoIdToRemove: number) => {
-  //   todos.value = todos.value.filter((todo) => todo.id !== todoIdToRemove);
-  // });
-
-  // get todosList(): TodoModel[] {
-  //   return [];
-  // }
+  export default {
+    data() {
+      return {
+        todos: [
+          { id: id++, text: 'Learn Vue.js', isComplete: false },
+        ],
+        newTodo: '',
+      }
+    },
+    methods: {
+      addTodo() {
+        this.todos.push({ id: id++, text: this.newTodo, isComplete: false })
+      },
+      removeTodo(todoIdToRemove) {
+        this.todos = this.todos.filter(todo => todo.id !== todoIdToRemove);
+      },
+    }
+  }
 </script>
 
 <template>
