@@ -98,9 +98,4 @@
   .feather-plus {
     height: 1rem;
   }
-
-  .completed {
-    color:        #7e7d8d;
-    text-decoration:  line-through;
-  }
 </style>
