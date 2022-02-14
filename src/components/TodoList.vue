@@ -24,7 +24,7 @@
         v-model="todo.isComplete"
       >
 
-      <label :for="`doneCheck${todo.id}`" :class="todo.isComplete ? 'completed' : ''">{{ todo.text }}</label>
+      <label :for="`doneCheck${todo.id}`" :class="{ completed: todo.isComplete }">{{ todo.text }}</label>
 
       <button
         class="btn btn-danger remove"
