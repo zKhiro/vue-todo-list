@@ -13,7 +13,9 @@
     },
     methods: {
       addTodo() {
-        this.todos.push({ id: id++, text: this.newTodo, isComplete: false })
+        this.todos.push({ id: id++, text: this.newTodo, isComplete: false });
+
+        this.newTodo = '';
       },
       removeTodo(todoIdToRemove) {
         this.todos = this.todos.filter(todo => todo.id !== todoIdToRemove);
