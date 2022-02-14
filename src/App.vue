@@ -1,19 +1,23 @@
-<script setup lang="ts">
-  import { ref } from 'vue';
-  import type { TodoModel } from './models';
+<script>
+ export default {
 
+ }
+  // let id = 0;
 
-  const todos = ref<TodoModel[]>([
-    { text: 'Learn Vue.js', isComplete: false, }
-  ]);
+  // const todos = ref<TodoModel[]>([
+  //   { id: id++, text: 'Learn Vue.js', isComplete: false, }
+  // ]);
 
-  const newTodo = ref('');
+  // const newTodo = ref('');
 
-  const addTodo     = ref(() => todos.value.push({ text: newTodo.value, isComplete: false }));
-  const removeTodo  = ref((todoIndexToRemove: number) => {
-    todos.value = todos.value.filter((_, todoIndex) => todoIndex !== todoIndexToRemove);
-  });
-  const toggleCompleteTodo = ref((todoIndexToComplete: number) => todos.value[todoIndexToComplete].isComplete = !todos.value[todoIndexToComplete].isComplete);
+  // const addTodo     = ref(() => todos.value.push({ id: id++, text: newTodo.value, isComplete: false }));
+  // const removeTodo  = ref((todoIdToRemove: number) => {
+  //   todos.value = todos.value.filter((todo) => todo.id !== todoIdToRemove);
+  // });
+
+  // get todosList(): TodoModel[] {
+  //   return [];
+  // }
 </script>
 
 <template>
@@ -44,18 +48,18 @@
   <main>
     <section class="container">
       <ul class="todo-list">
-        <li v-for="(todo, index) in todos" :key="index">
+        <li v-for="todo in todos" :key="todo.id">
           <input
             type="checkbox"
-            :id="`doneCheck${index}`"
-            @input="toggleCompleteTodo(index)"
+            :id="`doneCheck${todo.id}`"
+            v-model="todo.isComplete"
           >
 
-          <label :for="`doneCheck${index}`" :class="todo.isComplete ? 'completed' : ''">{{ todo.text }}</label>
+          <label :for="`doneCheck${todo.id}`" :class="todo.isComplete ? 'completed' : ''">{{ todo.text }}</label>
 
           <button
             class="btn btn-danger remove"
-            @click="removeTodo(index)"
+            @click="removeTodo(todo.id)"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
           </button>
@@ -96,6 +100,7 @@
     align-items:  center;
     display:      flex;
     padding:      .2em;
+    transition:   background .1s;
   }
 
   .todo-list li:hover {
