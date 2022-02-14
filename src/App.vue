@@ -17,7 +17,10 @@
       removeTodo(todoIdToRemove) {
         this.todos = this.todos.filter(todo => todo.id !== todoIdToRemove);
       },
-    }
+      removeAllTodos() {
+        this.todos = [];
+      }
+    },
   }
 </script>
 
@@ -44,6 +47,8 @@
         </div>
       </div>
     </form>
+
+    <button class="btn btn-danger" @click="removeAllTodos">Remove All</button>
   </section>
 
   <main>
