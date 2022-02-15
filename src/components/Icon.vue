@@ -5,7 +5,7 @@
     data() {
       return {
         svgIcon: '',
-        svgSize: this.size,
+        svgSize: this.size || 16,
       }
     },
     props: {
