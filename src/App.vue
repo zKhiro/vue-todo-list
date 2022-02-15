@@ -1,4 +1,5 @@
 <script>
+  import Icon from "./components/Icon.vue";
   import TodoList from "./components/TodoList.vue";
   import SideMenu from "./components/SideMenu.vue";
 
@@ -34,7 +35,7 @@
         return filteredTodos;
       }
     },
-    components: { TodoList, SideMenu }
+    components: { TodoList, SideMenu, Icon }
 }
 </script>
 
@@ -47,7 +48,7 @@
 
   <main>
     <section class="container">
-      <TodoList :todos="filteredTodos" @remove="removeTodo" />
+      <TodoList :todos="filteredTodos" @remove="removeTodo"></TodoList>
     </section>
   </main>
 </template>
