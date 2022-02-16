@@ -23,6 +23,11 @@
     created() {
       this.requestIcon();
     },
+    watch: {
+      icon() {
+        this.requestIcon();
+      }
+    },
   }
 
 </script>
@@ -35,12 +40,20 @@
   i { display: inline-flex; }
 
   i :deep(.feather) {
+    stroke-width: 2px;
+  }
+
+  i :deep(.icon) {
+    stroke-width: 1px;
+  }
+
+  i :deep(.feather), i :deep(.icon) {
     height:           v-bind(convertPxToRem(svgSize));
     fill:             none;
     stroke:           currentColor;
     stroke-linecap:   round;
     stroke-linejoin:  round;
-    stroke-width:     2px;
+
     width:            v-bind(convertPxToRem(svgSize));
   }
 </style>
