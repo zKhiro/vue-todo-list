@@ -1,22 +1,32 @@
 <script>
   import Checkbox from "./form/Checkbox.vue";
+  import HoldButton from "./HoldButton.vue";
+  import Icon from "./Icon.vue";
+
   import { animate } from "../utils";
+  import { CustomEvents } from "../utils/custom-events.const";
+
 
   const removeEvent = 'remove';
 
   export default {
+    data() {
+      return { CustomEvents }
+    },
     props: {
       todos: Array,
     },
     emits: [removeEvent],
     methods: {
       removeTodo(todoId) {
+        console.log(todoId);
         this.$emit(removeEvent, todoId);
       },
       animate,
     },
-    components: { Checkbox }
+    components: { Checkbox, HoldButton, Icon }
   }
+
 </script>
 
 <template>
@@ -24,7 +34,7 @@
     <li v-for="todo in todos" :key="todo.id">
       <label
         :for="`doneCheck${todo.id}`"
-        @click.self="animate($event.target, 'scale-down-animation')"
+        @click.self="animate($event.target, 'ani-scale-down')"
       >
         <Checkbox
           :checkboxId="`doneCheck${todo.id}`"
@@ -33,12 +43,14 @@
 
         <span :class="{ completed: todo.isComplete }">{{ todo.text }}</span>
 
-        <button
-          class="btn btn-danger remove"
-          @click="removeTodo(todo.id)"
+        <HoldButton
+          class="btn-danger remove"
+          progressColor="#f9c4d4"
+          :duration="500"
+          v-on:[CustomEvents.HoldButtonFinish]="removeTodo(todo.id)"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-        </button>
+          <Icon icon="trash-2"></Icon>
+        </HoldButton>
       </label>
     </li>
   </ul>
@@ -70,7 +82,7 @@
     border-radius:        .4em;
   }
 
-  .todo-list li>label * {
+  .todo-list li>label *:not(button.remove) {
     pointer-events: none;
   }
 
@@ -91,11 +103,11 @@
     text-decoration:  line-through;
   }
 
-  .scale-down-animation {
-    animation: scale-down-animation .2s;
+  .ani-scale-down {
+    animation: scale-down .2s;
   }
 
-  @keyframes scale-down-animation {
+  @keyframes scale-down {
     0%, 100%  { transform: scale(1); }
     50%       { transform: scale(.97); }
   }
